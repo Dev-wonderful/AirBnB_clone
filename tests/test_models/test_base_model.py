@@ -29,5 +29,8 @@ class Test_BaseModel(unittest.TestCase):
         self.b1.save()
         self.assertNotEqual(self.b1.created_at, self.b1.updated_at)
 
+    def test_to_dict(self):
+        self.assertIsInstance(self.b1.to_dict(), dict)
+
 if __name__ == '__main__':
     unittest.main()
