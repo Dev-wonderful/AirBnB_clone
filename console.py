@@ -4,10 +4,30 @@ import cmd
 from models.__init__ import storage
 from models.base_model import BaseModel
 
+
 class HBNBCommand(cmd.Cmd):
 	"""the entry class for the cmd interpreter"""
 
 	prompt = "(hbnb) "
+
+	def do_all(self, args):
+		"""print all instances based on a class name or not"""
+		class_dict = self.class_dict()
+		obj_dict = storage.all()
+		all_instances = []
+		class_instances = []
+		if len(args) == 0:
+			for key in obj_dict:
+				all_instances.append(obj_dict[key])
+			return self.print_msg(all_instances)
+		else:
+			if args not in class_dict:
+				return self.print_msg("** class doesn't exist **")
+			for key in obj_dict:
+				instance = obj_dict[key]
+				if instance["__class__"] == args:
+					class_instances.append(instance)
+			return self.print_msg(class_instances)
 
 	def do_create(self, args):
 		"""Creates a new instance of a class"""
@@ -24,9 +44,9 @@ class HBNBCommand(cmd.Cmd):
 		"""Delete an existing instance"""
 		obj = args.split()
 		while True:
-			passed, [ins, obj, key] = self.instance_check(obj)
+			passed, [instance, obj_dict, key] = self.instance_check(obj)
 			if passed:
-				del obj[key]
+				del obj_dict[key]
 			break
 
 	def do_EOF(self, args):
