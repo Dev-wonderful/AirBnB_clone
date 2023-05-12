@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """ A module to specify the base class"""
 from models.__init__ import storage
 from datetime import datetime
