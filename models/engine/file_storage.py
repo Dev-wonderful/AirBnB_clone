@@ -25,8 +25,11 @@ class FileStorage:
         key = ".".join([obj['__class__'], obj['id']])
         FileStorage.__objects[key] = obj
 
-    def save(self):
+    def save(self, obj=None):
         """serializes storage dictionary to JSON file"""
+        if obj is not None:
+            key = ".".join([obj['__class__'], obj['id']])
+            FileStorage.__objects[key] = obj
         with open(FileStorage.__file_path, 'w', encoding="utf-8") as json_file:
             json.dump(FileStorage.__objects, json_file)
 
@@ -37,6 +40,4 @@ class FileStorage:
                 FileStorage.__objects = json.load(json_file)
         except FileNotFoundError:
             pass
-
-    def user(self):
 

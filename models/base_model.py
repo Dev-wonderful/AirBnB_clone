@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """ A module to specify the base class"""
 from models.__init__ import storage
 from datetime import datetime
@@ -29,8 +29,9 @@ class BaseModel:
 
     def save(self):
         """Update the self.updated_at with the current datetime"""
-        storage.save()
         self.updated_at = datetime.now()
+        obj = self.to_dict()
+        storage.save(obj)
 
     def to_dict(self):
         """returns a dictionary containing all keys/values of __dict__ of the instance"""
@@ -39,4 +40,3 @@ class BaseModel:
         instance_dict['created_at'] = self.created_at.isoformat()
         instance_dict['updated_at'] = self.updated_at.isoformat()
         return instance_dict
-
