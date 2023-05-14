@@ -1,8 +1,15 @@
 #!/usr/bin/python3
 """HBNB command interpreter"""
 import cmd
-from models.__init__ import storage
+import sys
+
+from models import storage
+from models.amenity import Amenity
 from models.base_model import BaseModel
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
 from models.user import User
 
 
@@ -89,7 +96,13 @@ class HBNBCommand(cmd.Cmd):
 
     @staticmethod
     def class_dict():
-        class_dict = {'BaseModel': BaseModel, 'User': User}
+        class_dict = {'Amenity': Amenity,
+                      'BaseModel': BaseModel,
+                      'City': City,
+                      'Place': Place,
+                      'Review': Review,
+                      'State': State,
+                      'User': User}
         return class_dict
 
     def emptyline(self):
@@ -125,6 +138,13 @@ class HBNBCommand(cmd.Cmd):
         """Called to handle messages"""
         self.stdout.write("{}\n".format(msg))
 
+    def non_interactive(self):
+        """Handles non-interactive mode for this shell"""
+        return "Hello"
+
+
+if not sys.stdin.isatty():
+    HBNBCommand().non_interactive()
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

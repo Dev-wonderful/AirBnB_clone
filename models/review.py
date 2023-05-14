@@ -11,9 +11,9 @@ class Review(BaseModel):
         user_id (str): id of a User instance
         text (str): the review on the place
     """
-    place_id = " "
-    user_id = " "
-    text = " "
+    place_id = ""
+    user_id = ""
+    text = ""
 
     def __init__(self, *args, **kwargs):
         """Initializes an instance"""
