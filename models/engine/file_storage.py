@@ -1,13 +1,13 @@
 #!/usr/bin/python3
-"""A module that handles persistance of data"""
+"""A module that handles persistence of data"""
 import json
 
 
 class FileStorage:
     """A class to handle storage of objects in JSON"""
 
-    __file_path = "file.json"
-    __objects= {}
+    __file_path = "./file.json"
+    __objects = {}
 
     def __init__(self):
         """Initializes an instance of this class"""
@@ -40,4 +40,3 @@ class FileStorage:
                 FileStorage.__objects = json.load(json_file)
         except FileNotFoundError:
             pass
-
