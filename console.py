@@ -1,18 +1,24 @@
 #!/usr/bin/python3
-"""HBNB command interpreter"""
+""" HBNB command interpreter """
+
 import cmd
-from models.__init__ import storage
+import sys
+from models import storage
 from models.base_model import BaseModel
 from models.user import User
-
+from models.state import State
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
-    """the entry class for the cmd interpreter"""
+    """ the entry class for the cmd interpreter """
 
     prompt = "(hbnb) "
 
     def do_all(self, args):
-        """print all instances based on a class name or not"""
+        """ print all instances based on a class name or not """
         class_dict = self.class_dict()
         obj_dict = storage.all()
         all_instances = []
