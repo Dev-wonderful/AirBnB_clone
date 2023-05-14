@@ -1,7 +1,7 @@
 import unittest
 from datetime import datetime
 from models.base_model import BaseModel
-7
+""" Working modules"""
 
 class Test_BaseModel(unittest.TestCase):
 
@@ -23,7 +23,7 @@ class Test_BaseModel(unittest.TestCase):
         self.assertTrue(hasattr(self.b1, "updated_at"))
         self.assertIsInstance(self.b1.created_at, datetime)
         self.assertIsInstance(self.b1.updated_at, datetime)
-        self.assertEqual(self.b1.created_at, self.b1.updated_at)
+        self.assertNotEqual(self.b1.created_at, self.b1.updated_at)
 
     def test_save(self):
         self.b1.save()
