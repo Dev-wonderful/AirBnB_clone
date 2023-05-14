@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """Module to create user"""
 from models.base_model import BaseModel
-from models.__init__ import storage
 
 
 class User(BaseModel):

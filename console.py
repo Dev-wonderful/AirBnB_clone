@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """HBNB command interpreter"""
 import cmd
-import sys
 
 from models import storage
 from models.amenity import Amenity
@@ -62,6 +61,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, args):
         """Signal to End the reading of input"""
+        print()
         return True
 
     def do_quit(self, args):
@@ -138,13 +138,6 @@ class HBNBCommand(cmd.Cmd):
         """Called to handle messages"""
         self.stdout.write("{}\n".format(msg))
 
-    def non_interactive(self):
-        """Handles non-interactive mode for this shell"""
-        return "Hello"
-
-
-if not sys.stdin.isatty():
-    HBNBCommand().non_interactive()
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
