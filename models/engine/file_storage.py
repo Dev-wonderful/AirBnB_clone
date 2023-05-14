@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""A module that handles persistance of data"""
+"""A module that handles persistence of data"""
 import json
 
 
@@ -41,4 +41,3 @@ class FileStorage:
                 FileStorage.__objects = json.load(json_file)
         except FileNotFoundError:
             pass
-

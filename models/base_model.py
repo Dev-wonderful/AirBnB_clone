@@ -28,7 +28,7 @@ class BaseModel:
             storage.new(obj)
 
     def __str__(self):
-        """User friendly information of the instance"""
+        """User-friendly information of the instance"""
         return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
