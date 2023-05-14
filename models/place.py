@@ -1,16 +1,14 @@
 #!/usr/bin/python3
-""" BaseModel module imported from models directory """
-
+""" BaseModel module imported from models directory"""
 from models.base_model import BaseModel
 
-""" A class Place that inherits from BaseModel """
+""" A class Place that inherits from BaseModel"""
 class Place(BaseModel):
-    """ Public class attributes """
-
-    city_id = ""
-    user_id = ""
-    name = ""
-    description = ""
+    """ Public class attributes"""
+    city_id = " "
+    user_id = " "
+    name = " "
+    description = " "
     number_rooms = 0
     number_bathrooms = 0
     max_guest = 0
