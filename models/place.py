@@ -2,9 +2,9 @@
 """ BaseModel module imported from models directory"""
 from models.base_model import BaseModel
 
-""" A class Place that inherits from BaseModel"""
+
 class Place(BaseModel):
-    """ Public class attributes"""
+    """ A class Place that inherits from BaseModel"""
     city_id = " "
     user_id = " "
     name = " "
@@ -17,3 +17,6 @@ class Place(BaseModel):
     longitude = 0.0
     amenity_ids = []
 
+    def __init__(self, *args, **kwargs):
+        """Initializes an instance"""
+        super().__init__(*args, **kwargs)

@@ -1,14 +1,28 @@
 #!/usr/bin/python3
-""" The BaseModel module and File storage module"""
+"""Module to create user"""
 from models.base_model import BaseModel
-from models import storage
+from models.__init__ import storage
 
-"""" A class User that inherits from the BaseModel class"""
+
 class User(BaseModel):
-""" Public class attributes"""
+    """A class to template users
 
-    email = " "
-    password = " "
-    first_name = " "
-    last_name = " "
-        
+    Attributes:
+        first_name (str): first name of user
+        last_name (str): last name of user
+        email (str): email of user
+        password (str): password of user
+    """
+    first_name = ""
+    last_name = ""
+    email = ""
+    password = ""
+
+    def __init__(self, *args, **kwargs):
+        """Initializes an instance"""
+        super().__init__(*args, **kwargs)
+
+    # def save(self):
+    #     """Adds attribute to the object dictionary"""
+    #     obj = self.to_dict()
+    #     storage.save(obj)

@@ -9,7 +9,11 @@ class BaseModel:
     """The BaseModel class to be inherited"""
 
     def __init__(self, *args, **kwargs):
-        """Initialization of BaseModel class instance"""
+        """Initialization of BaseModel class instance
+
+        Args:
+            kwargs: To reload an existing instance using a dictionary
+        """
         if bool(kwargs):
             for key, value in kwargs.items():
                 if key != '__class__':
