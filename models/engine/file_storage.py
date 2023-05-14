@@ -49,6 +49,6 @@ class FileStorage:
                 from models.review import Review
 
                 FileStorage.__objects = json.load(json_file)
-        except OSError:
+        except FileNotFoundError:
             pass
 
