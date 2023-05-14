@@ -99,9 +99,11 @@ class HBNBCommand(cmd.Cmd):
                 for value in attr_list[4:]:
                     attribute_value = " ".join([attribute_value, value])
                     if value[-1] == '"':
+                        attribute_value = attribute_value[1:-1]
                         break
                     elif attr_list[-1] is value:
                         attribute_value = "".join([attribute_value, '"'])
+                        attribute_value = attribute_value[1:-1]
             setattr(instance, attribute_name, attribute_value)
             # obj_dict[key] = instance.to_dict()
             instance.save()
