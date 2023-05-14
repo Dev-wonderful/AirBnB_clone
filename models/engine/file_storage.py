@@ -1,13 +1,13 @@
 #!/usr/bin/python3
-"""A module that handles persistance of data"""
+"""A module that handles persistence of data"""
 import json
 
 
 class FileStorage:
     """A class to handle storage of objects in JSON"""
 
-    __file_path = "file.json"
-    __objects= {}
+    __file_path = "./file.json"
+    __objects = {}
 
     def __init__(self):
         """Initializes an instance of this class"""
@@ -37,7 +37,7 @@ class FileStorage:
         """deserializes the JSON file to storage dictionary, file path exists"""
         try:
             with open(FileStorage.__file_path, 'r', encoding="utf-8") as json_file:
+                print("here")
                 FileStorage.__objects = json.load(json_file)
         except FileNotFoundError:
             pass
-
