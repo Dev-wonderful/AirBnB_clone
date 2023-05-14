@@ -6,7 +6,7 @@ import json
 class FileStorage:
     """A class to handle storage of objects in JSON"""
 
-    __file_path = "file1.json"
+    __file_path = "./file.json"
     __objects = {}
 
     def __init__(self):
