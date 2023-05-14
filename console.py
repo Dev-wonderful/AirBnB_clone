@@ -1,8 +1,14 @@
 #!/usr/bin/python3
 """HBNB command interpreter"""
 import cmd
-from models.__init__ import storage
+
+from models import storage
+from models.amenity import Amenity
 from models.base_model import BaseModel
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
 from models.user import User
 
 
@@ -55,6 +61,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, args):
         """Signal to End the reading of input"""
+        print()
         return True
 
     def do_quit(self, args):
@@ -83,13 +90,31 @@ class HBNBCommand(cmd.Cmd):
                 return self.print_msg("** value missing **")
             instance = instance_data[0]
             attribute_name, attribute_value = attr_list[2:4]
+            if attribute_value[0] == '"' and attr_list[-1] is attribute_value:
+                if attribute_value[-1] == '"':
+                    attribute_value = attribute_value[1:-1]
+                else:
+                    attribute_value = attribute_value[1:]
+            else:
+                for value in attr_list[4:]:
+                    attribute_value = " ".join([attribute_value, value])
+                    if value[-1] == '"':
+                        break
+                    elif attr_list[-1] is value:
+                        attribute_value = "".join([attribute_value, '"'])
             setattr(instance, attribute_name, attribute_value)
             # obj_dict[key] = instance.to_dict()
             instance.save()
 
     @staticmethod
     def class_dict():
-        class_dict = {'BaseModel': BaseModel, 'User': User}
+        class_dict = {'Amenity': Amenity,
+                      'BaseModel': BaseModel,
+                      'City': City,
+                      'Place': Place,
+                      'Review': Review,
+                      'State': State,
+                      'User': User}
         return class_dict
 
     def emptyline(self):

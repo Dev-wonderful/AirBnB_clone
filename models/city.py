@@ -10,8 +10,8 @@ class City(BaseModel):
         state_id (str): The id of a state instance
         name (sr): The name of the city
     """
-    state_id = " "
-    name = " "
+    state_id = ""
+    name = ""
 
     def __init__(self, *args, **kwargs):
         """Initializes an instance"""

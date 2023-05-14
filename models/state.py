@@ -9,7 +9,7 @@ class State(BaseModel):
     Attributes:
         name (str): name of the state
     """
-    name = " "
+    name = ""
 
     def __init__(self, *args, **kwargs):
         """Initializes an instance"""

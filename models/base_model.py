@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ A module to specify the base class"""
-from models.__init__ import storage
+from models import storage
 from datetime import datetime
 import uuid
 
