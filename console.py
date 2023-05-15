@@ -117,6 +117,15 @@ class HBNBCommand(cmd.Cmd):
             # obj_dict[key] = instance.to_dict()
             instance.save()
 
+    def default(self, line):
+        """Called on an input line when the command prefix is not recognized.
+
+        If this method is not overridden, it prints an error message and
+        returns.
+
+        """
+        self.stdout.write('*** Unknown syntax: %s\n' % line)
+
     def emptyline(self):
         """Called when an empty line is entered in response to prompt"""
         pass
