@@ -146,8 +146,7 @@ class HBNBCommand(cmd.Cmd):
         if key not in obj_dict:
             self.print_msg("** no instance found **")
             return False, None
-        instance_dict = obj_dict[key]
-        instance = class_dict[class_name](**instance_dict)
+        instance = self.reload_instance(obj_dict[key], class_dict)
         return True, [instance, obj_dict, key]
 
     def print_msg(self, msg=None):
