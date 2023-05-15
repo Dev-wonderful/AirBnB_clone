@@ -32,9 +32,10 @@ class HBNBCommand(cmd.Cmd):
             if args not in class_dict:
                 return self.print_msg("** class doesn't exist **")
             for key in obj_dict:
-                instance = obj_dict[key]
-                if instance["__class__"] == args:
-                    class_instances.append(instance)
+                instance_dict = obj_dict[key]
+                if instance_dict["__class__"] == args:
+                    instance = self.reload_instance(obj_dict[key], class_dict)
+                    class_instances.append(str(instance))
             return self.print_msg(class_instances)
 
     def do_create(self, args):
