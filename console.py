@@ -94,7 +94,7 @@ class HBNBCommand(cmd.Cmd):
         check, instance_data = self.instance_check(attr_list)
         if check:
             if len_attr < 3:
-                return self.print_msg("** attribute name is missing **")
+                return self.print_msg("** attribute name missing **")
             elif len_attr < 4:
                 return self.print_msg("** value missing **")
             instance = instance_data[0]
