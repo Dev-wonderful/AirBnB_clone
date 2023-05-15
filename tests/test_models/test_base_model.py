@@ -3,7 +3,8 @@ from datetime import datetime
 from models.base_model import BaseModel
 """ Working modules"""
 
-class Test_BaseModel(unittest.TestCase):
+
+class TestBaseModel(unittest.TestCase):
 
     def setUp(self):
         self.b1 = BaseModel()
@@ -16,7 +17,6 @@ class Test_BaseModel(unittest.TestCase):
         self.assertTrue(hasattr(self.b1, "id"))
         self.assertIsInstance(self.b1.id, str)
         self.assertNotEqual(self.b1.id, self.b2.id)
-
 
     def test_time(self):
         self.assertTrue(hasattr(self.b1, "created_at"))
@@ -31,6 +31,7 @@ class Test_BaseModel(unittest.TestCase):
 
     def test_to_dict(self):
         self.assertIsInstance(self.b1.to_dict(), dict)
+
 
 if __name__ == '__main__':
     unittest.main()
