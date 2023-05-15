@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ A module to specify the base class"""
-from models import storage
+import models
 from datetime import datetime
 import uuid
 
@@ -24,8 +24,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            obj = self.to_dict()
-            storage.new(obj)
+            models.storage.new(self)
 
     def __str__(self):
         """User-friendly information of the instance"""
@@ -34,8 +33,7 @@ class BaseModel:
     def save(self):
         """Update the self.updated_at with the current datetime"""
         self.updated_at = datetime.now()
-        obj = self.to_dict()
-        storage.save(obj)
+        models.storage.save(self)
 
     def to_dict(self):
         """returns a dictionary containing all keys/values of __dict__ of the instance"""
