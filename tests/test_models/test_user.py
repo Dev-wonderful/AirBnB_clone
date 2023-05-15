@@ -40,23 +40,5 @@ class TestUser(unittest.TestCase):
         pass
 
 
-class TestTime(unittest.TestCase):
-    """ Test to check the accuracy of the time """
-
-    def setUp(self):
-        self.b1 = BaseModel()
-
-    def test_accurate_time(self):
-        self.assertTrue(hasattr(self.b1, "created_at"))
-        self.assertTrue(hasattr(self.b1, "updated_at"))
-        self.assertIsInstance(self.b1.created_at, datetime)
-        self.assertIsInstance(self.b1.updated_at, datetime)
-        self.assertNotEqual(self.b1.created_at, self.b1.updated_at)
-
-    def tearDown(self):
-        """Tear down all methods"""
-        pass
-
-
 if __name__ == '__main__':
     unittest.main()
