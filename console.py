@@ -25,7 +25,8 @@ class HBNBCommand(cmd.Cmd):
         class_instances = []
         if len(args) == 0:
             for key in obj_dict:
-                all_instances.append(obj_dict[key])
+                instance = self.reload_instance(obj_dict[key], class_dict)
+                all_instances.append(str(instance))
             return self.print_msg(all_instances)
         else:
             if args not in class_dict:
@@ -151,6 +152,12 @@ class HBNBCommand(cmd.Cmd):
     def print_msg(self, msg=None):
         """Called to handle messages"""
         self.stdout.write("{}\n".format(msg))
+
+    @staticmethod
+    def reload_instance(instance_dict, class_dict):
+        class_name = instance_dict['__class__']
+        instance = class_dict[class_name](**instance_dict)
+        return instance
 
 
 if __name__ == '__main__':
