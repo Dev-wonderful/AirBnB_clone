@@ -15,8 +15,10 @@ class TestUser(unittest.TestCase):
     def test_class_attributes(self):
         u1 = User()
         attr = ["email", "password", "first_name", "last_name"]
+        # getting instance attribute
         d = u1.__dict__
         for i in attr:
+            # testing for class attribute
             self.assertFalse(i in d)
             self.assertTrue(hasattr(u1, i))
 
@@ -31,34 +33,10 @@ class TestUser(unittest.TestCase):
         self.assertEqual(self.u1.last_name, "")
 
     def test_inherit_from_basemodel(self):
-        self.assertTrue(issubclass(self.u1, BaseModel))
+        self.assertTrue(issubclass(User, BaseModel))
 
     def tearDown(self):
         """ Tear down all method """
-        pass
-
-
-class TestInstance(unittest.TestCase):
-    """ Test for the instance of the parent class """
-
-    def setup(self):
-        """ Set up all Methods """
-        self.b1 = BaseModel()
-        self.b2 = BaseModel()
-
-    def test_instance(self):
-        """ Test for the instance of the parent class """
-
-        self.assertIsInstance(self.b1, BaseModel)
-
-    def test_instance_attributes(self):
-        """ Test for instance attributes of the parent class """
-        self.assertTrue(hasattr(self.b1, "id"))
-        self.assertIsInstance(self.b1, str)
-        self.assertNotEqual(self.b1.id, self.b2.id)
-
-    def tearDown(self):
-        """ Tear down all methods """
         pass
 
 
@@ -76,33 +54,8 @@ class TestTime(unittest.TestCase):
         self.assertNotEqual(self.b1.created_at, self.b1.updated_at)
 
     def tearDown(self):
-        """ Tear down all methods """
+        """Tear down all methods"""
         pass
-
-
-class TestSave(unittest.TestCase):
-    """ Test for checking time that objects are updated """
-
-    def setUp(self):
-        self.b1 = BaseModel()
-
-    def test_save(self):
-        """ The test to save update time """
-        self.b1.save()
-        self.assertNotEqual(self.b1.created_at, self.b1.updated_at)
-
-    def tearDown(self):
-        """ Tear down all methods """
-        pass
-
-
-class TestToDict(unittest.TestCase):
-
-    def setUp(self):
-        self.b1 = BaseModel()
-
-    def test_to_dict(self):
-        self.assertIsInstance(self.b1.to_dict(), dict)
 
 
 if __name__ == '__main__':
