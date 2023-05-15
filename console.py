@@ -16,29 +16,38 @@ class HBNBCommand(cmd.Cmd):
     """the entry class for the cmd interpreter"""
 
     prompt = "(hbnb) "
+    class_dict = {'Amenity': Amenity,
+                  'BaseModel': BaseModel,
+                  'City': City,
+                  'Place': Place,
+                  'Review': Review,
+                  'State': State,
+                  'User': User}
 
     def do_all(self, args):
         """print all instances based on a class name or not"""
-        class_dict = self.class_dict()
+        class_dict = self.class_dict
         obj_dict = storage.all()
         all_instances = []
         class_instances = []
         if len(args) == 0:
             for key in obj_dict:
-                all_instances.append(obj_dict[key])
+                instance = obj_dict[key]
+                all_instances.append(str(instance))
             return self.print_msg(all_instances)
         else:
             if args not in class_dict:
                 return self.print_msg("** class doesn't exist **")
             for key in obj_dict:
-                instance = obj_dict[key]
-                if instance["__class__"] == args:
-                    class_instances.append(instance)
+                instance_dict = obj_dict[key].to_dict()
+                if instance_dict["__class__"] == args:
+                    instance = obj_dict[key]
+                    class_instances.append(str(instance))
             return self.print_msg(class_instances)
 
     def do_create(self, args):
         """Creates a new instance of a class"""
-        class_dict = self.class_dict()
+        class_dict = self.class_dict
         if len(args) == 0:
             return self.print_msg("** class name missing **")
         elif args not in class_dict:
@@ -54,8 +63,8 @@ class HBNBCommand(cmd.Cmd):
         while True:
             passed, instance_data = self.instance_check(obj)
             if passed:
-                obj_dict, key = instance_data[1:]
-                del obj_dict[key]
+                all_objs, key = instance_data[1:]
+                del all_objs[key]
                 storage.save()
             break
 
@@ -85,7 +94,7 @@ class HBNBCommand(cmd.Cmd):
         check, instance_data = self.instance_check(attr_list)
         if check:
             if len_attr < 3:
-                return self.print_msg("** attribute name is missing **")
+                return self.print_msg("** attribute name missing **")
             elif len_attr < 4:
                 return self.print_msg("** value missing **")
             instance = instance_data[0]
@@ -99,23 +108,23 @@ class HBNBCommand(cmd.Cmd):
                 for value in attr_list[4:]:
                     attribute_value = " ".join([attribute_value, value])
                     if value[-1] == '"':
+                        attribute_value = attribute_value[1:-1]
                         break
                     elif attr_list[-1] is value:
                         attribute_value = "".join([attribute_value, '"'])
+                        attribute_value = attribute_value[1:-1]
             setattr(instance, attribute_name, attribute_value)
             # obj_dict[key] = instance.to_dict()
             instance.save()
 
-    @staticmethod
-    def class_dict():
-        class_dict = {'Amenity': Amenity,
-                      'BaseModel': BaseModel,
-                      'City': City,
-                      'Place': Place,
-                      'Review': Review,
-                      'State': State,
-                      'User': User}
-        return class_dict
+    def default(self, line):
+        """Called on an input line when the command prefix is not recognized.
+
+        If this method is not overridden, it prints an error message and
+        returns.
+
+        """
+        self.stdout.write('*** Unknown syntax: %s\n' % line)
 
     def emptyline(self):
         """Called when an empty line is entered in response to prompt"""
@@ -125,8 +134,8 @@ class HBNBCommand(cmd.Cmd):
         """Check and return an instance"""
         i = 0
         len_obj = len(obj)
-        class_dict = self.class_dict()
-        obj_dict = storage.all()
+        class_dict = self.class_dict
+        all_objs = storage.all()
         if len_obj == 0:
             self.print_msg("** class name missing **")
             return False, None
@@ -134,17 +143,15 @@ class HBNBCommand(cmd.Cmd):
             self.print_msg("** class doesn't exist **")
             return False, None
         elif len_obj == 1:
-            self.print_msg("**instance id missing **")
+            self.print_msg("** instance id missing **")
             return False, None
-        class_name = obj[0]
-        obj_id = obj[1]
+        class_name, obj_id = obj[:2]
         key = ".".join([class_name, obj_id])
-        if key not in obj_dict:
+        if key not in all_objs:
             self.print_msg("** no instance found **")
             return False, None
-        instance_dict = obj_dict[key]
-        instance = class_dict[class_name](**instance_dict)
-        return True, [instance, obj_dict, key]
+        instance = all_objs[key]
+        return True, [instance, all_objs, key]
 
     def print_msg(self, msg=None):
         """Called to handle messages"""
