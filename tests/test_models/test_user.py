@@ -26,12 +26,12 @@ class TestUser(unittest.TestCase):
         self.assertIsInstance(self.u1.first_name, str)
         self.assertIsInstance(self.u1.last_name, str)
         self.assertEqual(self.u1.email, "")
-        self.assertEqual(u1.password, "")
-        self.assertEqual(u1.first_name, "")
-        self.assertEqual(u1.last_name, "")
+        self.assertEqual(self.u1.password, "")
+        self.assertEqual(self.u1.first_name, "")
+        self.assertEqual(self.u1.last_name, "")
 
     def test_inherit_from_basemodel(self):
-        self.assertTrue(issubclass(u1, BaseModel))
+        self.assertTrue(issubclass(self.u1, BaseModel))
 
     def tearDown(self):
         """ Tear down all method """
