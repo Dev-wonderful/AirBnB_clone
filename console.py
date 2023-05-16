@@ -124,11 +124,34 @@ class HBNBCommand(cmd.Cmd):
         returns.
 
         """
+        cmd_str, full_args = self.parser(line)
+        if hasattr(self, cmd_str):
+            cmd_fn = getattr(self, cmd_str)
+            return cmd_fn(full_args)
         self.stdout.write('*** Unknown syntax: %s\n' % line)
 
     def emptyline(self):
         """Called when an empty line is entered in response to prompt"""
         pass
+
+    @staticmethod
+    def parser(line):
+        obj_type, others = line.split(".")
+        cmd_chars = []
+
+        for char in others:
+            if char == "(":
+                break
+            cmd_chars.append(char)
+        start = len(cmd_chars)
+        args = others[start:]
+        args = args[1:-1]
+        cmd_str = "".join(cmd_chars)
+        cmd_str = "".join(['do_', cmd_str])
+        full_args = " ".join([obj_type, args])
+        full_args = full_args.strip()
+        # self.stdout.write("-%s-\n" % full_args)
+        return cmd_str, full_args
 
     def instance_check(self, obj):
         """Check and return an instance"""
