@@ -44,7 +44,7 @@ class HBNBCommand(cmd.Cmd):
     def do_count(self, args):
         """Return a count all needed instances"""
         count = len(self.handle_all(args))
-        return count
+        return self.print_msg(count)
 
     def do_destroy(self, args):
         """Delete an existing instance"""
