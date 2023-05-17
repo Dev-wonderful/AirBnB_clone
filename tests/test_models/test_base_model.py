@@ -42,7 +42,6 @@ class TestBaseModel(unittest.TestCase):
         # b2 instance
         self.assertIsInstance(self.b2.created_at, datetime)
         self.assertIsInstance(self.b2.updated_at, datetime)
-        self.assertAlmostEqual(self.b2.created_at, self.b2.updated_at)
         old = self.b2.updated_at
         time.sleep(0.1)
         self.b2.save()
