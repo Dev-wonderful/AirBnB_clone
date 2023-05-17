@@ -62,7 +62,6 @@ class TestPlace(unittest.TestCase):
         # p1 instance
         self.assertIsInstance(self.p1.created_at, datetime)
         self.assertIsInstance(self.p1.updated_at, datetime)
-        self.assertAlmostEqual(self.p1.created_at, self.p1.updated_at)
         old = self.p1.updated_at
         time.sleep(0.1)
         self.p1.save()

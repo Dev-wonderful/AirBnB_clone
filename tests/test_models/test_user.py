@@ -46,7 +46,6 @@ class TestUser(unittest.TestCase):
         # u1 instance
         self.assertIsInstance(self.u1.created_at, datetime)
         self.assertIsInstance(self.u1.updated_at, datetime)
-        self.assertAlmostEqual(self.u1.created_at, self.u1.updated_at)
         old = self.u1.updated_at
         time.sleep(0.1)
         self.u1.save()

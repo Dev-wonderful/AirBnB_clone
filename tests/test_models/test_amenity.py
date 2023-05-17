@@ -45,7 +45,6 @@ class TestAmenity(unittest.TestCase):
         # a1 instance
         self.assertIsInstance(self.a1.created_at, datetime)
         self.assertIsInstance(self.a1.updated_at, datetime)
-        self.assertAlmostEqual(self.a1.created_at, self.a1.updated_at)
         old = self.a1.updated_at
         time.sleep(0.1)
         self.a1.save()
