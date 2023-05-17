@@ -7,7 +7,7 @@ from unittest import mock
 """" The working modules """
 
 
-class TestUser(unittest.TestCase):
+class TestReview(unittest.TestCase):
     """ Test for the User class"""
 
     @mock.patch('models.storage')
