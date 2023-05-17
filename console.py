@@ -27,7 +27,7 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, args):
         """print all instances based on a class name or not"""
         needed_instances = self.handle_all(args)
-            return self.print_msg(needed_instances)
+        return self.print_msg(needed_instances)
 
     def do_create(self, args):
         """Creates a new instance of a class"""
