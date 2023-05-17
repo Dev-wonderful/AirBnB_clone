@@ -26,24 +26,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, args):
         """print all instances based on a class name or not"""
-        class_dict = self.class_dict
-        obj_dict = storage.all()
-        all_instances = []
-        class_instances = []
-        if len(args) == 0:
-            for key in obj_dict:
-                instance = obj_dict[key]
-                all_instances.append(str(instance))
-            return self.print_msg(all_instances)
-        else:
-            if args not in class_dict:
-                return self.print_msg("** class doesn't exist **")
-            for key in obj_dict:
-                instance_dict = obj_dict[key].to_dict()
-                if instance_dict["__class__"] == args:
-                    instance = obj_dict[key]
-                    class_instances.append(str(instance))
-            return self.print_msg(class_instances)
+        needed_instances = self.handle_all(args)
+            return self.print_msg(needed_instances)
 
     def do_create(self, args):
         """Creates a new instance of a class"""
@@ -56,6 +40,11 @@ class HBNBCommand(cmd.Cmd):
         # storage.new() has already been called in the new instance
         storage.save()
         return self.print_msg(new_instance.id)
+
+    def do_count(self, args):
+        """Return a count all needed instances"""
+        count = len(self.handle_all(args))
+        return count
 
     def do_destroy(self, args):
         """Delete an existing instance"""
@@ -152,6 +141,26 @@ class HBNBCommand(cmd.Cmd):
         full_args = full_args.strip()
         # self.stdout.write("-%s-\n" % full_args)
         return cmd_str, full_args
+
+    def handle_all(self, args):
+        class_dict = self.class_dict
+        obj_dict = storage.all()
+        all_instances = []
+        class_instances = []
+        if len(args) == 0:
+            for key in obj_dict:
+                instance = obj_dict[key]
+                all_instances.append(str(instance))
+            return all_instances
+        else:
+            if args not in class_dict:
+                return self.print_msg("** class doesn't exist **")
+            for key in obj_dict:
+                instance_dict = obj_dict[key].to_dict()
+                if instance_dict["__class__"] == args:
+                    instance = obj_dict[key]
+                    class_instances.append(str(instance))
+            return class_instances
 
     def instance_check(self, obj):
         """Check and return an instance"""
