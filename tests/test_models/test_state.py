@@ -1,77 +1,76 @@
 import time
 import unittest
 from datetime import datetime
-from models.city import City
+from models.state import State
 from models.base_model import BaseModel
 from unittest import mock
 """" The working modules """
 
 
 class TestState(unittest.TestCase):
-    """ Test for the User class"""
+    """ Test for the State class"""
 
     @mock.patch('models.storage')
     def setUp(self, mock_storage):
-        self.c1 = City()
-        mock_storage.new.assert_called_with(self.c1)
+        self.s1 = State()
+        mock_storage.new.assert_called_with(self.s1)
 
     def test_inherit_from_basemodel(self):
-        self.assertTrue(issubclass(City, BaseModel))
+        self.assertTrue(issubclass(State, BaseModel))
 
     def test_inheritance(self):
         """Test for Inheritance"""
-        self.assertIsInstance(self.c1, BaseModel)
+        self.assertIsInstance(self.s1, BaseModel)
         attr_list = ['id', 'created_at', 'updated_at']
         for attr in attr_list:
-            self.assertTrue(hasattr(self.c1, attr))
+            self.assertTrue(hasattr(self.s1, attr))
 
     def test_class_attributes(self):
-        attr_list = ["name", "state_id"]
+        attr_list = ["name"]
         # getting instance attribute
-        c1_dict = self.c1.__dict__
+        s1_dict = self.s1.__class__.__dict__
         for class_attr in attr_list:
             # testing for class attribute
-            self.assertFalse(class_attr in c1_dict)
-            self.assertTrue(hasattr(self.c1, class_attr))
-            self.assertIsInstance(class_attr, str)
+            self.assertTrue(hasattr(self.s1, class_attr))
+            self.assertIsInstance(s1_dict[class_attr], str)
 
     def test_id(self):
-        c2 = City()
-        self.assertIsInstance(self.c1.id, str)
-        self.assertNotEqual(self.c1.id, c2.id)
+        s2 = State()
+        self.assertIsInstance(self.s1.id, str)
+        self.assertNotEqual(self.s1.id, s2.id)
 
     def test_time(self):
         """Testing the time type and accuracy"""
-        # a1 instance
-        self.assertIsInstance(self.c1.created_at, datetime)
-        self.assertIsInstance(self.c1.updated_at, datetime)
-        old = self.c1.updated_at
+        # s1 instance
+        self.assertIsInstance(self.s1.created_at, datetime)
+        self.assertIsInstance(self.s1.updated_at, datetime)
+        old = self.s1.updated_at
         time.sleep(0.1)
-        self.c1.save()
-        new = self.c1.updated_at
+        self.s1.save()
+        new = self.s1.updated_at
         self.assertNotEqual(old, new)
 
     def test_str(self):
         """Testing for the correct string output"""
-        # c1 instance
-        output_str = "[City] ({}) {}".format(self.c1.id, self.c1.__dict__)
-        self.assertEqual(output_str, str(self.c1))
+        # s1 instance
+        output_str = "[State] ({}) {}".format(self.s1.id, self.s1.__dict__)
+        self.assertEqual(output_str, str(self.s1))
 
     def test_to_dict(self):
-        self.assertIsInstance(self.c1.to_dict(), dict)
-        c1_dict = self.c1.to_dict()
+        self.assertIsInstance(self.s1.to_dict(), dict)
+        s1_dict = self.s1.to_dict()
         attr_list = ['id', 'created_at', 'updated_at', '__class__']
         for attr in attr_list:
-            self.assertTrue(True if attr in c1_dict else False)
-        self.assertTrue(isinstance(c1_dict['created_at'], str))
-        self.assertTrue(isinstance(c1_dict['updated_at'], str))
-        self.assertEqual(c1_dict['__class__'], 'City')
+            self.assertTrue(True if attr in s1_dict else False)
+        self.assertTrue(isinstance(s1_dict['created_at'], str))
+        self.assertTrue(isinstance(s1_dict['updated_at'], str))
+        self.assertEqual(s1_dict['__class__'], 'State')
 
     @mock.patch('models.storage')
     def test_save(self, storage_mock):
         """Testing the save function"""
-        self.c1.save()
-        storage_mock.save.assert_called_with(self.c1)
+        self.s1.save()
+        storage_mock.save.assert_called_with(self.s1)
 
     def tearDown(self):
         """ Tear down all method """

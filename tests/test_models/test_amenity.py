@@ -8,7 +8,7 @@ from unittest import mock
 
 
 class TestAmenity(unittest.TestCase):
-    """ Test for the User class"""
+    """ Test for the Amenity class"""
 
     @mock.patch('models.storage')
     def setUp(self, mock_storage):
@@ -28,12 +28,11 @@ class TestAmenity(unittest.TestCase):
     def test_class_attributes(self):
         attr_list = ["name"]
         # getting instance attribute
-        a1_dict = self.a1.__dict__
+        a1_dict = self.a1.__class__.__dict__
         for class_attr in attr_list:
             # testing for class attribute
-            self.assertFalse(class_attr in a1_dict)
             self.assertTrue(hasattr(self.a1, class_attr))
-            self.assertIsInstance(class_attr, str)
+            self.assertIsInstance(a1_dict[class_attr], str)
 
     def test_id(self):
         a2 = Amenity()

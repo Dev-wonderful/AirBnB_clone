@@ -9,7 +9,7 @@ from unittest import mock
 
 
 class TestCity(unittest.TestCase):
-    """ Test for the User class"""
+    """ Test for the City class"""
 
     @mock.patch('models.storage')
     def setUp(self, mock_storage):

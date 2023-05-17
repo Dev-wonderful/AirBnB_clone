@@ -8,7 +8,7 @@ from unittest import mock
 
 
 class TestPlace(unittest.TestCase):
-    """ Test for the User class"""
+    """ Test for the Place class"""
 
     @mock.patch('models.storage')
     def setUp(self, mock_storage):

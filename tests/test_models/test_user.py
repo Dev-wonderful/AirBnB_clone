@@ -29,12 +29,11 @@ class TestUser(unittest.TestCase):
         u1 = User()
         attr_list = ["email", "password", "first_name", "last_name"]
         # getting instance attribute
-        d = u1.__dict__
+        u1_dict = u1.__class__.__dict__
         for class_attr in attr_list:
             # testing for class attribute
-            self.assertFalse(class_attr in d)
             self.assertTrue(hasattr(u1, class_attr))
-            self.assertIsInstance(class_attr, str)
+            self.assertIsInstance(u1_dict[class_attr], str)
 
     def test_id(self):
         u2 = User()
