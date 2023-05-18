@@ -23,6 +23,7 @@ class HBNBCommand(cmd.Cmd):
                   'Review': Review,
                   'State': State,
                   'User': User}
+    update_dict = False
 
     def do_all(self, args):
         """print all instances based on a class name or not"""
@@ -87,30 +88,43 @@ class HBNBCommand(cmd.Cmd):
             elif len_attr < 4:
                 return self.print_msg("** value missing **")
             instance = instance_data[0]
-            attribute_name, attribute_value = attr_list[2:4]
-            if attribute_value[0] == '"' and attr_list[-1] is attribute_value:
-                if attribute_value[-1] == '"':
-                    attribute_value = attribute_value[1:-1]
+            start = 2
+            stop = start + 2
+            again = True
+            while again:
+                attribute_name, attribute_value = attr_list[start:stop]
+                if attribute_value[0] == '"' and attr_list[-1] is attribute_value:
+                    if attribute_value[-1] == '"':
+                        attribute_value = attribute_value[1:-1]
+                    else:
+                        attribute_value = attribute_value[1:]
+                elif attribute_value[0] == '"':
+                    start = stop
+                    for value in attr_list[start:]:
+                        attribute_value = " ".join([attribute_value, value])
+                        stop += 1
+                        if value[-1] == '"':
+                            attribute_value = attribute_value[1:-1]
+                            break
+                        elif attr_list[-1] is value:
+                            attribute_value = "".join([attribute_value, '"'])
+                            attribute_value = attribute_value[1:-1]
+                setattr(instance, attribute_name, attribute_value)
+                if self.update_dict and len(attr_list) > stop:
+                    again = True
+                    start = stop
+                    stop = start + 2
                 else:
-                    attribute_value = attribute_value[1:]
-            else:
-                for value in attr_list[4:]:
-                    attribute_value = " ".join([attribute_value, value])
-                    if value[-1] == '"':
-                        attribute_value = attribute_value[1:-1]
-                        break
-                    elif attr_list[-1] is value:
-                        attribute_value = "".join([attribute_value, '"'])
-                        attribute_value = attribute_value[1:-1]
-            setattr(instance, attribute_name, attribute_value)
-            # obj_dict[key] = instance.to_dict()
+                    again = False
+                    self.update_dict = False
+                # obj_dict[key] = instance.to_dict()
             instance.save()
 
     def default(self, line):
         """Called on an input line when the command prefix is not recognized.
 
         If this method is not overridden, it prints an error message and
-        returns.
+        returns. It has been overriden and extended here :)
 
         """
         cmd_str, full_args = self.parser(line)
@@ -123,8 +137,7 @@ class HBNBCommand(cmd.Cmd):
         """Called when an empty line is entered in response to prompt"""
         pass
 
-    @staticmethod
-    def parser(line):
+    def parser(self, line):
         obj_type, others = line.split(".")
         cmd_chars = []
 
@@ -135,6 +148,27 @@ class HBNBCommand(cmd.Cmd):
         start = len(cmd_chars)
         args = others[start:]
         args = args[1:-1]
+        count = args.count(",")
+        if count > 0:
+            # print(count)
+            args = args.split(",")
+            print(args)
+            count = args[1].count("{")
+            if count > 0:
+                obj_id = args[0]
+                attr_dict = "".join(args[1:])
+                attr_dict = attr_dict.strip()
+                attr_dict = attr_dict[1:-1]
+                print(attr_dict)
+                attr_dict = attr_dict.split(": ")
+                attr_dict.insert(0, obj_id)
+                args = " ".join(attr_dict)
+                self.update_dict = True
+                print(attr_dict)
+            else:
+                args = "".join(args)
+            print(args)
+            # print(args)
         cmd_str = "".join(cmd_chars)
         cmd_str = "".join(['do_', cmd_str])
         full_args = " ".join([obj_type, args])
