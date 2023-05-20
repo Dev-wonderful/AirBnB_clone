@@ -1,0 +1,12 @@
+header{
+    background-color:#ffffff; 
+    height: 70px; 
+    width: 100%;
+    border-bottom: 1px solid #CCCCCC;
+    padding: 5px 10px;
+}
+header div.logo{
+    background-image: url(../images/logo.png);
+    height: 60px;
+    width: 142px;
+}
