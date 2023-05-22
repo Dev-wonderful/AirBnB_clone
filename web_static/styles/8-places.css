@@ -51,10 +51,34 @@ section.places div.information{
     border-top: 1px solid #DDDDDD;
     border-bottom: 1px solid #DDDDDD;
     margin: 5px 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 section.places div.information div{
     width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 section.places div.user{
     margin: 5px 0;
+}
+section.places div.max_guest div{
+    background-image: url(../images/max_guest.png);
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 50px;
+}
+section.places div.number_rooms div{
+    background-image: url(../images/bedroom.png);
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 50px;
+}
+section.places div.number_bathrooms div{
+    background-image: url(../images/bathroom.png);
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 50px;
 }
