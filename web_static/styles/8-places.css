@@ -46,3 +46,15 @@ section.places div.price_by_night{
     top: 0px;
     right: 0px;
 }
+section.places div.information{
+    height: 80px;
+    border-top: 1px solid #DDDDDD;
+    border-bottom: 1px solid #DDDDDD;
+    margin: 5px 0;
+}
+section.places div.information div{
+    width: 100px;
+}
+section.places div.user{
+    margin: 5px 0;
+}
