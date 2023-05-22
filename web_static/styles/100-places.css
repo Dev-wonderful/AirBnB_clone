@@ -84,16 +84,18 @@ section.places div.number_bathrooms div{
 section.places div.amenities{
     margin-top: 40px;
 }
-section.places div.amenities .title{
+section.places div.amenities .title,
+section.places div.reviews .title{
     border-bottom: 1px solid #DDDDDD;
     height: 20px;
 }
-section.places div.amenities h2{
-    margin: 0;
+section.places div.amenities h2,
+section.places div.reviews h2{
     font-size: 16px;
     text-align: left;
 }
-section.places div.amenities ul{
+section.places div.amenities ul,
+section.places div.reviews ul{
     list-style: none;
     margin: 20px 0;
     padding-inline-start: 0;
@@ -120,4 +122,17 @@ section.places div.amenities div.wifi{
     height: 20px;
     width: 20px;
     margin-right: 10px;
+}
+section.places div.reviews{
+    margin-top: 40px;
+}
+section.places div.reviews .title{
+    border-bottom: 1px solid #DDDDDD;
+}
+section.places div.reviews h3{
+    font-size: 14px;
+    text-align: left;
+}
+section.places div.reviews li{
+    margin-bottom: 10px;
 }
