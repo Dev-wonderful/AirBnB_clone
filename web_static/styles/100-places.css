@@ -1,0 +1,123 @@
+section.places{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+}
+section.places h1{
+    font-size: 30px;
+    margin-right: auto;
+}
+section.places .all_articles{
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+section.places article{
+    width: 390px;
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid  #FF5A5F;
+    border-radius: 4px;
+}
+section.places article h2{
+    font-size: 30px;
+    text-align: center;
+}
+section.places div.title{
+    width: 100%;
+    position: relative;
+    height: 60px;
+}
+section.places div.price_by_night{
+    color: #FF5A5F;
+    border: 4px solid #FF5A5F;
+    border-radius: 50%;
+    min-width: 60px;
+    height: 60px;
+    font-size: 30px;
+    line-height: 30px;
+    padding: 10px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+section.places div.information{
+    height: 80px;
+    border-top: 1px solid #DDDDDD;
+    border-bottom: 1px solid #DDDDDD;
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+section.places div.information div{
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+section.places div.user{
+    margin: 5px 0;
+}
+section.places div.max_guest div{
+    background-image: url(../images/max_guest.png);
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 50px;
+}
+section.places div.number_rooms div{
+    background-image: url(../images/bedroom.png);
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 50px;
+}
+section.places div.number_bathrooms div{
+    background-image: url(../images/bathroom.png);
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 50px;
+}
+section.places div.amenities{
+    margin-top: 40px;
+}
+section.places div.amenities .title{
+    border-bottom: 1px solid #DDDDDD;
+    height: 20px;
+}
+section.places div.amenities h2{
+    margin: 0;
+    font-size: 16px;
+    text-align: left;
+}
+section.places div.amenities ul{
+    list-style: none;
+    margin: 20px 0;
+    padding-inline-start: 0;
+}
+section.places div.amenities li{
+    display: flex;
+    justify-content: flex-start;
+    width: 150px;
+    margin-bottom: 10px;
+}
+section.places div.amenities div.pet{
+    background-image: url(../images/pet_friendly.png);
+}
+section.places div.amenities div.tv{
+    background-image: url(../images/tv.png);
+}
+section.places div.amenities div.wifi{
+    background-image: url(../images/wifi.png);
+}
+section.places div.amenities div.pet,
+section.places div.amenities div.tv,
+section.places div.amenities div.wifi{
+    background-size: contain;
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+}
