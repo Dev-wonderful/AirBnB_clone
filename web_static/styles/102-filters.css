@@ -38,7 +38,7 @@ section.filters div.locations{
 }
 div.locations div,
 div.amenities div{
-    width: 100%;
+    width: fit-content;
 }
 div.locations div h3,
 div.amenities div h3{
@@ -120,6 +120,7 @@ div.amenities:hover ul.popover{
     }
     div.locations div h3,
     div.amenities div h3{
+        text-align: left;
         font-weight: 600;
         margin: 0;
     }
